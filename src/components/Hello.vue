@@ -2,13 +2,14 @@
   <div class="hello">
     <h2>Simple Validation Form</h2>
     <form @submit.prevent="handleIt">
-      <input type="text" name="id" v-model="id">
+      <input type="text" name="id" v-model="id" class="id_input">
       <br>
-      <label class="error" v-show="!checkValid()">
+      <p class="error" v-show="!checkValid()">
         {{ err_msg }}
-      </label>
-      <br>
-      <button class="btn btn-primary btn-block form-control" type="submit">Submit</button>
+      </p>
+      <p>
+        <button class="btn btn-primary btn-block input-button" type="submit">Submit</button>  
+      </p>
     </form>
     <h6>@ It was just made for test only @</h6>
   </div>
@@ -19,7 +20,7 @@ export default {
   data () {
     return {
       MAX_LENGTH: 20,
-      MIN_LENGTH: 1,
+      MIN_LENGTH: 10,
       id: '',
       err_msg: '',
     }
@@ -98,6 +99,17 @@ export default {
 
   .error {
     color: #ee1133;
+  }
+
+  .id_input {
+    font-size: 18pt;
+    height: 50px;
+    width: 300px;
+  }
+
+  .input-button {
+    height: 40px;
+    width: 100px;
   }
 
 </style>
