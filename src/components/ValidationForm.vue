@@ -146,24 +146,25 @@ export default {
         let char = this.id.charAt( this.rules[i].position );
         switch( this.rules[i].value ) {
           case 'number':
-            if ( !this.isCharDigit(char) ) {
+            if ( !this.isCharDigit(char) && this.id.length > this.rules[i].position) {
               this.err_msg = 'The ' + (this.rules[i].position + 1) + 'th character must be a number';
               return false;
             };
             break;
           case 'letter':
-            if ( this.isCharDigit(char) ) {
+            if ( this.isCharDigit(char) && this.id.length > this.rules[i].position ) {
               this.err_msg = 'The ' + (this.rules[i].position + 1)+ 'th character must be a letter';
               return false;
             };
             break;
           default:
-            if ( char !== this.rules[i].value ) {
+            if ( char !== this.rules[i].value && this.id.length > this.rules[i].position ) {
               this.err_msg = 'The ' + (this.rules[i].position + 1)+ 'th character must be a ' + this.rules[i].value;
               return false;
             }
         }
       }
+      this.err_msg = '';
       return true;
     },
   }
