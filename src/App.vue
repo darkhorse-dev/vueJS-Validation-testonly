@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <hello></hello>
+    <validationForm></validationForm>
   </div>
 </template>
 
 <script>
-  import Hello from './components/Hello'
+  import ValidationForm from './components/ValidationForm'
 
   export default {
     name: 'app',
     components: {
-      Hello,
+      ValidationForm,
     }
   }
 </script>

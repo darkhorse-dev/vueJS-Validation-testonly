@@ -25,7 +25,7 @@
       <div v-show="selected == ''" class="form-group">
           <label>Custom Value</label>
           <input class="form-control" type="text" v-model="value">  
-        </div>
+      </div>
       <b-button class="btn btn-primary" @click="addRule(selected)">Add rule</b-button>
     </form>
     <table class="table" align="center">
@@ -50,7 +50,6 @@
       <p class="error" v-show="!checkValid()">
         {{ err_msg }}
       </p>
-      <br>
       <p>
         <button class="btn btn-primary btn-block input-button" type="submit">Submit</button>  
       </p>
@@ -62,8 +61,9 @@
 <script>
 export default {
   data () {
+
     return {
-      max_length: 10,
+      max_length: 20,
       min_length: 0,
       id: '',
       err_msg: '',
@@ -77,16 +77,16 @@ export default {
         { value: '', text: 'certain value' },
       ],
       rules: [
-       {position: 1, value: 'number'},
-       {position: 3, value: 'letter'},
-       {position: 5, value: 'L'},
+       { position: 1, value: 'number' },
+       { position: 3, value: 'letter' },
+       { position: 5, value: 'L' },
       ],
     }
   },
   methods: {
 
     isExist: function(pos) {
-      for (var i = 0; i < this.rules.length; i++) {
+      for ( var i = 0; i < this.rules.length; i++ ) {
         if ( this.rules[i].position == pos ) {
           return true;
         }
@@ -94,11 +94,11 @@ export default {
       return false;
     },
     addRule: function(selected) {
-      if (this.position == null || this.selected == null || this.position == 0) {
+      if ( this.position == null || this.selected == null || this.position == 0 ) {
         alert('Input correctly!');
         return;
       }
-      if (this.isExist(this.position-1)) {
+      if ( this.isExist(this.position-1) ) {
         alert('Position rule already exist! Delete existing one and recreate it');
         return;
       }
@@ -135,29 +135,30 @@ export default {
       }
     },
     checkValid: function() {
-      if (!this.checkLength()) {
+      if (this.id == '') {
+        return false;
+      }
+      if ( !this.checkLength() ) {
         this.err_msg = 'The length of ID must be in ' + this.min_length + ' and ' + this.max_length + ' !';
         return false;
       }
-      for (var i = 0; i < this.rules.length; i++) {
-        console.log('asdfasdf');
-        let char = this.id.charAt(this.rules[i].position);
-        console.log(char);
-        switch(this.rules[i].value) {
+      for ( var i = 0; i < this.rules.length; i++ ) {
+        let char = this.id.charAt( this.rules[i].position );
+        switch( this.rules[i].value ) {
           case 'number':
-            if(!this.isCharDigit(char)) {
+            if ( !this.isCharDigit(char) ) {
               this.err_msg = 'The ' + (this.rules[i].position + 1) + 'th character must be a number';
               return false;
             };
             break;
           case 'letter':
-            if(this.isCharDigit(char)) {
+            if ( this.isCharDigit(char) ) {
               this.err_msg = 'The ' + (this.rules[i].position + 1)+ 'th character must be a letter';
               return false;
             };
             break;
           default:
-            if (char !== this.rules[i].value) {
+            if ( char !== this.rules[i].value ) {
               this.err_msg = 'The ' + (this.rules[i].position + 1)+ 'th character must be a ' + this.rules[i].value;
               return false;
             }
@@ -194,20 +195,9 @@ export default {
     color: #ee1133;
   }
 
-  .id_input {
-    font-size: 18pt;
-    height: 50px;
-    width: 300px;
-  }
-
   .input-button {
     height: 40px;
     width: 100px;
-  }
-
-  .validation_rules {
-    padding: 5px;
-    margin: 10px;
   }
 
 </style>
